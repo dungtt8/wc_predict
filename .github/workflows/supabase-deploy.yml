@@ -40,8 +40,6 @@ jobs:
 
       - name: Set Supabase secrets
         run: |
-          supabase secrets set SUPABASE_URL="${{ secrets.SUPABASE_URL }}"
-          supabase secrets set SUPABASE_SERVICE_ROLE_KEY="${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}"
           supabase secrets set API_FOOTBALL_KEY="${{ secrets.API_FOOTBALL_KEY }}"
 
       - name: Deploy sync-fixtures function
