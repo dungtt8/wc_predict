@@ -32,17 +32,14 @@ jobs:
       - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "pnpm" # Thay 'npm' bằng 'pnpm'
-
-      - name: Install pnpm
-        run: npm install -g pnpm
+          node-version: '20'
+          cache: 'npm' # Chuyển lại về dùng cache của npm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile # Dùng pnpm để cài đặt
+        run: npm ci # Sử dụng npm ci thay vì pnpm install
 
       - name: Build frontend
-        run: pnpm run build
+        run: npm run build # Sử dụng npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
