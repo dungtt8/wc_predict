@@ -1,0 +1,117 @@
+Task 1 TDD evidence (post-hoc audit)
+Generated (UTC): 2026-06-17T09:21:54Z
+
+Method:
+1) Verify GREEN on current code
+2) Simulate RED by changing Task 1 heading text in src/App.tsx
+3) Restore src/App.tsx and verify GREEN again
+
+--- GREEN (current code) ---
+$ npm test -- src/__tests__/app-shell.test.tsx
+
+> wc_predict@0.1.0 test
+> vitest run src/__tests__/app-shell.test.tsx
+
+
+ RUN  v2.1.9 /Users/dung_tt/Desktop/Freelances/wc_predict
+
+ ✓ src/__tests__/app-shell.test.tsx (1 test) 24ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  16:21:55
+   Duration  549ms (transform 19ms, setup 0ms, collect 69ms, tests 24ms, environment 192ms, prepare 35ms)
+
+exit_code=0
+
+--- RED (simulated by temporary heading mutation) ---
+$ npm test -- src/__tests__/app-shell.test.tsx
+
+> wc_predict@0.1.0 test
+> vitest run src/__tests__/app-shell.test.tsx
+
+
+ RUN  v2.1.9 /Users/dung_tt/Desktop/Freelances/wc_predict
+
+ ❯ src/__tests__/app-shell.test.tsx (1 test | 1 failed) 26ms
+   × App shell > renders heading World Cup 2026 Prediction 25ms
+     → Unable to find an accessible element with the role "heading" and name "World Cup 2026 Prediction"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "World Cup 2026 Prediction TEMP RED":
+  [36m<h1 />[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<h1>[39m
+      [0mWorld Cup 2026 Prediction TEMP RED[0m
+    [36m</h1>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/__tests__/app-shell.test.tsx > App shell > renders heading World Cup 2026 Prediction
+TestingLibraryElementError: Unable to find an accessible element with the role "heading" and name "World Cup 2026 Prediction"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "World Cup 2026 Prediction TEMP RED":
+  [36m<h1 />[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<h1>[39m
+      [0mWorld Cup 2026 Prediction TEMP RED[0m
+    [36m</h1>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/__tests__/app-shell.test.tsx:10:14
+      8| 
+      9|     expect(
+     10|       screen.getByRole('heading', { name: 'World Cup 2026 Prediction' …
+       |              ^
+     11|     ).toBeInTheDocument();
+     12|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  16:21:56
+   Duration  485ms (transform 23ms, setup 0ms, collect 45ms, tests 26ms, environment 135ms, prepare 61ms)
+
+exit_code=1
+
+--- GREEN (restored code) ---
+$ npm test -- src/__tests__/app-shell.test.tsx
+
+> wc_predict@0.1.0 test
+> vitest run src/__tests__/app-shell.test.tsx
+
+
+ RUN  v2.1.9 /Users/dung_tt/Desktop/Freelances/wc_predict
+
+ ✓ src/__tests__/app-shell.test.tsx (1 test) 23ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  16:21:56
+   Duration  398ms (transform 15ms, setup 0ms, collect 44ms, tests 23ms, environment 123ms, prepare 30ms)
+
+exit_code=0
