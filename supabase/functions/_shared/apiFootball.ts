@@ -1,22 +1,25 @@
-type ApiFixtureRow = {
-  fixture: { id: number; date: string; status: { short: string } };
-  teams: { home: { id: number; name: string }; away: { id: number; name: string } };
-  goals: { home: number | null; away: number | null };
-  league: { round: string };
+type FootballDataMatch = {
+  id: number;
+  utcDate: string;
+  status: string;
+  stage: string;
+  homeTeam: { id: number; name: string };
+  awayTeam: { id: number; name: string };
+  score: { fullTime: { home: number | null; away: number | null } };
 };
 
-export function mapFixturePayload(row: ApiFixtureRow) {
+export function mapFixturePayload(match: FootballDataMatch) {
   return {
-    apiSourceId: row.fixture.id,
-    kickoffAt: row.fixture.date,
-    status: row.fixture.status.short,
-    stage: row.league.round,
-    homeTeamApiId: row.teams.home.id,
-    awayTeamApiId: row.teams.away.id,
-    homeTeamName: row.teams.home.name,
-    awayTeamName: row.teams.away.name,
-    homeScore: row.goals.home,
-    awayScore: row.goals.away,
+    apiSourceId: match.id,
+    kickoffAt: match.utcDate,
+    status: match.status,
+    stage: match.stage,
+    homeTeamApiId: match.homeTeam.id,
+    awayTeamApiId: match.awayTeam.id,
+    homeTeamName: match.homeTeam.name,
+    awayTeamName: match.awayTeam.name,
+    homeScore: match.score.fullTime.home,
+    awayScore: match.score.fullTime.away,
   };
 }
 

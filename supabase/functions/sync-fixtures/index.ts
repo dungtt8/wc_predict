@@ -9,12 +9,12 @@ Deno.serve(async () => {
   );
 
   const response = await fetchWithRetry(
-    "https://v3.football.api-sports.io/fixtures?league=1&season=2026",
-    { "x-apisports-key": Deno.env.get("API_FOOTBALL_KEY")! },
+    "https://api.football-data.org/v4/competitions/WC/matches?season=2026",
+    { "X-Auth-Token": Deno.env.get("API_FOOTBALL_KEY")! },
   );
 
   const payload = await response.json();
-  const fixtures = payload.response.map(mapFixturePayload);
+  const fixtures = payload.matches.map(mapFixturePayload);
 
   for (const fixture of fixtures) {
     await supabase.from("teams").upsert(
