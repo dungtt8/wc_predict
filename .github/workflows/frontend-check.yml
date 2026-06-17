@@ -35,6 +35,9 @@ jobs:
           node-version: "20"
           cache: "pnpm" # Thay 'npm' bằng 'pnpm'
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile # Dùng pnpm để cài đặt
 
