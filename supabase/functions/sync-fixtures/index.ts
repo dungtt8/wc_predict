@@ -14,6 +14,12 @@ Deno.serve(async () => {
   );
 
   const payload = await response.json();
+
+  console.log("Payload nhận được:", JSON.stringify(payload).substring(0, 500)); // Log để kiểm tra data
+
+  if (!payload.response && !payload.matches) {
+    throw new Error("API response không có dữ liệu mong đợi");
+  }
   const fixtures = payload.matches.map(mapFixturePayload);
 
   for (const fixture of fixtures) {
