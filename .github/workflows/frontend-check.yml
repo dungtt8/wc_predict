@@ -42,3 +42,10 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+
+      - name: Sync fixtures
+        if: github.ref == 'refs/heads/main'
+        run: |
+          curl -X POST '${{ secrets.SUPABASE_SYNC_FUNCTION_URL }}' \
+            -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
+            -H 'Content-Type: application/json'
