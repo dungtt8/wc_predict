@@ -5,20 +5,21 @@ on:
     branches:
       - main
     paths:
-      - 'src/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'vite.config.ts'
-      - 'index.html'
+      - "src/**"
+      - "package.json"
+      - "package-lock.json"
+      - "vite.config.ts"
+      - "index.html"
   pull_request:
     branches:
       - main
     paths:
-      - 'src/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'vite.config.ts'
-      - 'index.html'
+      - "src/**"
+      - "package.json"
+      - "package-lock.json"
+      - "vite.config.ts"
+      - "index.html"
+  workflow_dispatch: {}
 
 jobs:
   build:
@@ -31,8 +32,8 @@ jobs:
       - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm' # Thay 'npm' bằng 'pnpm'
+          node-version: "20"
+          cache: "pnpm" # Thay 'npm' bằng 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile # Dùng pnpm để cài đặt
