@@ -95,3 +95,4 @@ Project hiện đang ở mức **MVP skeleton**:
 - UI room entry + dashboard cơ bản đã có
 - Supabase schema / migration / edge functions đã được dựng khung
 - Một số dữ liệu trên dashboard vẫn đang dùng demo data để nối dần với backend thực
+# wc_predict
