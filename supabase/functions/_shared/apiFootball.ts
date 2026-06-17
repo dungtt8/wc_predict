@@ -8,18 +8,22 @@ type FootballDataMatch = {
   score: { fullTime: { home: number | null; away: number | null } };
 };
 
-export function mapFixturePayload(match: FootballDataMatch) {
+export function mapFixturePayload(match: any) {
+  // Sử dụng toán tử ?? (nullish coalescing) để gán giá trị mặc định nếu API trả về null
+  const homeId = match.homeTeam?.id ?? 0;
+  const awayId = match.awayTeam?.id ?? 0;
+
   return {
     apiSourceId: match.id,
     kickoffAt: match.utcDate,
-    status: match.status,
-    stage: match.stage,
-    homeTeamApiId: match.homeTeam.id,
-    awayTeamApiId: match.awayTeam.id,
-    homeTeamName: match.homeTeam.name,
-    awayTeamName: match.awayTeam.name,
-    homeScore: match.score.fullTime.home,
-    awayScore: match.score.fullTime.away,
+    status: match.status ?? 'TIMED',
+    stage: match.stage ?? 'REGULAR_SEASON',
+    homeTeamApiId: Number(homeId), 
+    awayTeamApiId: Number(awayId),
+    homeTeamName: match.homeTeam?.name ?? "TBD",
+    awayTeamName: match.awayTeam?.name ?? "TBD",
+    homeScore: match.score?.fullTime?.home ?? null,
+    awayScore: match.score?.fullTime?.away ?? null,
   };
 }
 

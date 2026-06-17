@@ -23,7 +23,12 @@ Deno.serve(async () => {
   if (!payload.response && !payload.matches) {
     throw new Error("API response không có dữ liệu mong đợi");
   }
-  const fixtures = payload.matches.map(mapFixturePayload);
+  const fixtures = payload.matches.map(mapFixturePayload).filter(f => f.homeTeamApiId !== 0 && f.awayTeamApiId !== 0);
+
+  if (fixtures.length === 0) {
+      console.log("Không có trận đấu hợp lệ để sync.");
+      return new Response(JSON.stringify({ synced: 0 }));
+  }
 
   for (const fixture of fixtures) {
     await supabase.from("teams").upsert(
