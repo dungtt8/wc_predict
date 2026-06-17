@@ -41,5 +41,4 @@ export async function fetchWithRetry(url: string, headers: HeadersInit, maxAttem
 
   throw lastError ?? new Error("Unknown API failure");
 
-  // const response = await fetch(url, { headers });
 }
