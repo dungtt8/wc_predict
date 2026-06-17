@@ -8,9 +8,12 @@ Deno.serve(async () => {
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
   );
 
+  const apiKey = Deno.env.get("API_FOOTBALL_KEY"); // Hoặc FOOTBALL_DATA_API_KEY
+  console.log("Key đã lấy được chưa:", apiKey ? "Đã có" : "BỊ RỖNG");
+
   const response = await fetchWithRetry(
     "https://api.football-data.org/v4/competitions/WC/matches?season=2026",
-    { "X-Auth-Token": Deno.env.get("API_FOOTBALL_KEY")! },
+    { "X-Auth-Token": apiKey! },
   );
 
   const payload = await response.json();
